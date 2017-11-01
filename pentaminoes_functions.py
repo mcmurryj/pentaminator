@@ -29,7 +29,7 @@ def get_ok_poses(shape, grid):
     ok_poses = []
     #only works for a cubic grid, maybe?
     gridshape   = grid.shape
-    squares     = product(gridshape[0], gridshape[1], gridshape[2])
+    squares     = product(range(gridshape[0]), range(gridshape[1]), range(gridshape[2]))
     # For every spot in the grid...
     for s in squares :
         # If the spot is supposed to have stuff in it...
@@ -136,7 +136,8 @@ def chunk_incompatible(superimposition) :
     """returns TRUE if the nascent grid cannot possibly work.
     FALSE means it maybe can work.
     Basis is the volume of contiguous chunks."""
-    squares     = product(range(5), range(5), range(5))
+    gridshape   = superimposition.shape
+    squares     = product(range(gridshape[0]), range(gridshape[1]), range(gridshape[2]))
     for s in squares :
         if superimposition[s] == 1 :
             chunk_len = len(get_chunk([s], superimposition))
@@ -144,11 +145,11 @@ def chunk_incompatible(superimposition) :
 
 def place_next(pieces,
                grid,
-               index_list = [],
-               limit      = int(np.sum(grid) * 2 -1) ) :
+               index_list = [] ) :
     """Recursively try to place pieces.
     If there is overlap or if you trap a space with volume not divisible by 5, give up.
     When you have filled the grid, print the solution. """
+    limit      = int(np.sum(grid) + len(pieces)*5 -1)
     poses = pieces[0]
     for p in poses :
         superimposition = grid + p
@@ -160,9 +161,9 @@ def place_next(pieces,
         if np.sum(superimposition) > limit :
             print("victory\n")
             for i in new_list:
-                print(i[0:2,:])
-                print('\n')
-            print("\n\n")
+                print(i)
+                print('\n\n')
+            print("\n\n\n\n\n\n")
         else:
             #If you still have pieces left to try...""
             if len(pieces) > 1:

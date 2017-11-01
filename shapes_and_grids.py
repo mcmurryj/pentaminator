@@ -1,3 +1,7 @@
+############################IMPORT#############################
+import numpy as np
+
+##############SHAPES###########################################
 #line
 shape_1 = [np.array((0,0,0)),
            np.array((1,0,0)),
@@ -74,3 +78,27 @@ shape_11 = [np.array((0,0,0)),
             np.array((1,1,0)),
             np.array((2,1,0)),
             np.array((1,2,0))]
+
+############GRIDS##############################################
+
+#grid size must be odd and at least 5
+#at least the way I am thinking about doing poses
+#For some reason coords are z,x,y w/r/t pictures in the game manual
+
+#pyramid problem # 60
+pyramid            = np.zeros(5**3).reshape(5, 5, 5)
+pyramid[0,:]       = 1
+pyramid[1,1:4,1:4] = 1
+pyramid[2,2,2]     = 1
+
+#box with a hole in the top problem # 61
+hole_cube                 = np.zeros(5**3).reshape(5, 5, 5)
+hole_cube[0:4, 0:3, 0:3]  = 1   #the cube
+hole_cube[3,1,1]          = 0   #the hole
+
+#throne prob # 62
+throne                    = np.zeros(9*3*2).reshape(9, 3, 2)
+throne[0:7, 0, 0]         = 1
+throne[0:9, 1, 0]         = 1
+throne[0:7, 2, 0]         = 1
+throne[0:4, 0:3, 1]       = 1

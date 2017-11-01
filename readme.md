@@ -34,6 +34,8 @@ PLACEMENT OF PIECES:
 
 As mentioned, the solver is probably not super-efficient. Possible improvements:
 
-- Right now all possible solutions are printed.  I only really care about finding one solution.  I should set things up to halt recursion once a solution is found.
-- Alternately, it would be possible to eliminate trivial solutions that are just rotations of other solutions.  This could be accomplished by checking all the POSES for a given PIECE to eliminate POSES that can be made equivalent through 90 degree or 180-degree rotations, assuming the SHAPE is symmetrical with respect to those rotations as well.
+- Right now all possible solutions are printed.  I only really care about finding one solution, because I just want to know how to make the puzzle.  I should set things up to halt recursion once a solution is found.
+- Alternately, it would be possible to eliminate trivial solutions that are just rotations of other solutions.  This could be accomplished by checking all the POSES for one and only one given PIECE to eliminate POSES of that PIECE that can be made equivalent through 90 degree or 180-degree rotations, assuming the SHAPE is symmetrical with respect to those rotations as well.
+- I assume the order in which pieces are placed will influence the time to find the first solution.  Potentially placing pieces with fewer possible poses first will result in quicker convergence.
+- The functions to generate all possible poses are quite inefficient, but they also don't have to deal with the combinatorial explosion that results from combining different poses, so this doesn't seem like a huge problem.
 - Time-consuming functions could be implemented in Cython.

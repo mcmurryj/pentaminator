@@ -1,10 +1,19 @@
 import pentaminoes_functions as pen
 import shapes_and_grids as stuff
 
-pieces = [shape_4, shape_5, shape_6, shape_7, shape_8, shape_2, shape_3]
+pieces = [stuff.shape_4,
+          stuff.shape_5,
+          stuff.shape_6,
+          stuff.shape_7,
+          stuff.shape_8,
+          stuff.shape_2,
+          stuff.shape_3]
 
 pose_list     = []
 
+grid = stuff.throne
+
+#Get the usable poses for the pieces.
 #For every piece in the list of pieces to be used....
 for p in pieces:
     #get all possible orientations of the piece within the grid
@@ -23,4 +32,4 @@ for p in pieces:
 
 #Recursively place pieces from the list of possible orientations
 #Print the solutions.
-pen.place_next(pose_list, grid)
+pen.place_next(pose_list, stuff.throne)
